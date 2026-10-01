@@ -48,9 +48,6 @@ h1 {
   opacity: .7;
 }
 .navbar {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 0 20px;
   height: 80px;
 }
@@ -90,7 +87,7 @@ h1 {
     text-decoration: underline;
 }
 
-.row .nav__row {
+.nav__row {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -98,8 +95,6 @@ h1 {
 
 .nav__logo {
     display: flex;
-    margin-right: 120px;
     height: 120px;
     width: 160px;
-    position: absolute;
 }
