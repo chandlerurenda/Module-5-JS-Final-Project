@@ -1,0 +1,42 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Roboto', sans-serif;
+}
+
+body {
+    max-width: 100vw;
+    overflow-x: hidden;
+}
+
+.row {
+    width: 100%;
+    margin: 0 auto;
+}
+
+a {
+    text-decoration: none;
+    color: #242424;
+    cursor: pointer;
+}
+
+
+
+/* LANDING & NAV */
+
+nav {
+ display: flex;
+}
+
+.row .nav__row {
+    width: 100%;
+}
+
+
+.landing__overlay {
+   background-image: url("../assets/Dune 1984 HD.jpg");
+   background-size: cover;
+   height: 100vh;
+}
