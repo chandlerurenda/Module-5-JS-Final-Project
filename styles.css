@@ -111,8 +111,16 @@ align-items: center;
 margin-bottom: 24px;
 }
 
+.header__input--wrapper {
+    width: 100%;
+    max-width: 440px;
+    position: relative;
+    overflow: hidden;
+
+}
+
 .header__input {
-    width: 440px;
+    width: 100%;
     padding: 12px;
     border-radius: 24px;
     border: none;
