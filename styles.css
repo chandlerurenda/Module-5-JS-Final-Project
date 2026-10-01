@@ -188,7 +188,7 @@ header {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0 20px;
+    padding: 0 40px;
 }
 
 .duration__filter--wrapper {
@@ -200,8 +200,11 @@ header {
     margin: 20px 0;
 }
 
-.el-slider {
-    display: flex;
-
+.input__slider {
+    cursor: pointer;
 }
 
+.input__slider--text {
+    display: flex;
+    justify-content: space-between;
+}
