@@ -25,15 +25,12 @@ a {
   cursor: pointer;
 }
 
-h1 {
-  color: #fff;
-}
 
 /* LANDING & NAV */
 
 #landing {
   position: relative;
-  height: 100vh;
+  height: 40vh;
 }
 
 .landing__overlay {
@@ -135,6 +132,7 @@ header {
 
 .header__title {
   margin-bottom: 24px;
+  color: #fff;
 }
 
 .search__input--wrapper {
@@ -178,3 +176,32 @@ header {
   transition: all 300ms ease;
   outline: none;
 }
+
+
+/* SEARCH RESULTS SECTION */
+
+#search__results {
+    height: 40vh;
+}
+
+.filter__content--wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.duration__filter--wrapper {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-parameter {
+    margin: 20px 0;
+}
+
+.el-slider {
+    display: flex;
+
+}
+
