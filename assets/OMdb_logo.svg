@@ -1,0 +1,70 @@
+<svg width="800" height="250" viewBox="0 0 800 250" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Cinematic Gold/Orange Gradient -->
+    <linearGradient id="primaryGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F5A623" />
+      <stop offset="100%" stop-color="#F76B1C" />
+    </linearGradient>
+
+    <!-- Dark Premium Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#141820" />
+      <stop offset="100%" stop-color="#0a0c10" />
+    </linearGradient>
+
+    <!-- Subtle Drop Shadow for the Reel -->
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#F76B1C" flood-opacity="0.35"/>
+    </filter>
+
+    <!-- Subtle Background Spotlight -->
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#F76B1C" stop-opacity="0.15" />
+      <stop offset="100%" stop-color="#0a0c10" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect width="100%" height="100%" fill="url(#bgGrad)" rx="24" />
+  <ellipse cx="215" cy="125" rx="200" ry="125" fill="url(#bgGlow)" />
+
+  <!-- ========================================== -->
+  <!-- "O" FILM REEL ICON                         -->
+  <!-- ========================================== -->
+  <g transform="translate(0, 0)">
+    <!-- Outer Ring -->
+    <circle cx="215" cy="125" r="55" fill="none" stroke="url(#primaryGrad)" stroke-width="14" filter="url(#glow)" />
+    
+    <!-- Inner Hub -->
+    <circle cx="215" cy="125" r="18" fill="none" stroke="url(#primaryGrad)" stroke-width="12" filter="url(#glow)" />
+    
+    <!-- Spoke Connections (Mathematically calculated dasharray to perfectly form 5 transparent cutouts) -->
+    <circle cx="215" cy="125" r="36" fill="none" stroke="url(#primaryGrad)" stroke-width="24" stroke-dasharray="12 33.239" filter="url(#glow)" />
+    
+    <!-- Center Play Icon (Rounded Corners via Stroke) -->
+    <polygon points="209,115 209,135 226,125" fill="#ffffff" stroke="#ffffff" stroke-width="3" stroke-linejoin="round" filter="url(#glow)" />
+  </g>
+
+  <!-- ========================================== -->
+  <!-- TYPOGRAPHY "MDb"                           -->
+  <!-- ========================================== -->
+  
+  <!-- Main Lettering -->
+  <text x="300" y="155" font-family="'Inter', 'Montserrat', 'Helvetica Neue', sans-serif" font-weight="900" font-size="100" fill="#ffffff" letter-spacing="-2">
+    MD<tspan fill="url(#primaryGrad)">b</tspan>
+  </text>
+
+  <!-- Subtitle -->
+  <text x="305" y="195" font-family="'Inter', 'Montserrat', 'Helvetica Neue', sans-serif" font-weight="600" font-size="15" fill="#8b949e" letter-spacing="6.5">
+    OPEN MOVIE DATABASE
+  </text>
+
+  <!-- API Badge Element -->
+  <g transform="translate(540, 75)">
+    <rect x="0" y="0" width="46" height="22" rx="11" fill="#141820" stroke="url(#primaryGrad)" stroke-width="2" />
+    <text x="23" y="15" font-family="'Inter', 'Montserrat', 'Helvetica Neue', sans-serif" font-weight="800" font-size="11" fill="url(#primaryGrad)" text-anchor="middle" letter-spacing="1.5">
+      API
+    </text>
+  </g>
+
+</svg>
