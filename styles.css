@@ -137,12 +137,14 @@ header {
 
 .search__logo {
   position: absolute;
-  display: inline-block;
-  align-items: center;
-  justify-content: center;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
   font-size: 24px;
-  padding-left:
+  cursor: pointer;
 }
+
+.search__logo
 
 .header__input:active {
 }
