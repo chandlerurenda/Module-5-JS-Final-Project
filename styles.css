@@ -40,9 +40,9 @@ h1 {
   position: absolute;
   top: 0;
   left: 0;
-  height: 30vh;
+  height: 40vh;
   width: 100vw;
-  background-image: url("/assets/Gemini_Generated_Image_p0jl2vp0jl2vp0jl.jpg");
+  background-image: url("/assets/Dune_1984_Overlay.jpg");
   background-size: cover;
   background-position: center;
   z-index: -1;
@@ -93,10 +93,11 @@ h1 {
   max-width: 1280px;
 }
 
-.nav__logo {
+.nav__logo--img {
     display: flex;
     height: 120px;
     width: 160px;
-    padding-left: 6px;
-    padding-bottom: 64px;
+    padding-left: 0px;
+    padding-bottom: 76px;
+    opacity: .7;
 }
