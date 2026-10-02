@@ -256,12 +256,12 @@ header {
   font-size: 20px;
 }
 
-.film__rating {
+.media__type {
   display: flex;
   align-items: center;
 }
 
-.film__rating--logo {
+.media__type--logo {
   height: 28px;
   width: 28px;
   margin-right: 12px;
