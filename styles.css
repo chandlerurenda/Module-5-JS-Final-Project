@@ -276,7 +276,7 @@ header {
     display: none !important;
 }
 .films__loading .films__loading--spinner {
-    display: block !important;
+    display: block;
 }
 
 .media__type--wrapper {

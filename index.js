@@ -2,10 +2,11 @@
 // // http://img.omdbapi.com/?apikey=7974a547&
 
 function setLoading(loading) {
+const showLoading = document.querySelector(".films__loading--spinner")
 if (loading) {
-document.body.classList += ' films__loading'
+showLoading.classList.add("films__loading")
 } else {
-document.body.classList.remove('films__loading')
+showLoading.classList.remove("films__loading")
 }
 }
 
