@@ -208,3 +208,46 @@ header {
     display: flex;
     justify-content: space-between;
 }
+
+#films {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+padding: 24px 24px
+}
+
+.film {
+    padding: 24px;
+}
+
+.film__img {
+    cursor: pointer;
+    transition: all 300ms ease;
+    overflow: hidden;
+}
+
+.film__img:hover {
+    transform: scale(1.04);
+
+}
+
+.film__img--wrapper {
+    margin-bottom: 12px;
+}
+
+.film__title {
+font-size: 24px;
+font-weight: bold;
+}
+
+.film__year {
+
+}
+
+.film__rating {
+
+}
+
+.film__duration {
+
+}
