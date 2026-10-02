@@ -104,8 +104,8 @@ const runtimeSlider = document.querySelector(".runtime__slider");
       );
     )
     .join("")};
-
+  }
 fetchFilms("batman");
-}}
+}
 
 main();
