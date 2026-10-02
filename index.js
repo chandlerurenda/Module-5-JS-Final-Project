@@ -2,14 +2,13 @@
 // http://img.omdbapi.com/?apikey=7974a547&
 
 async function main() {
-const searchBar = document.querySelector.getElementById('search__input')
+const searchBar = document.querySelector(".search__input")
   const films = await fetch("http://www.omdbapi.com/?apikey=7974a547&s=batman");
   const filmEl = document.querySelector(".films");
 
   async function fetchFilms(query) {
     const response = await fetch(`http://www.omdbapi.com/?apikey=7974a547&s=${query}`);
-    const filmsData = await films.json();
-  }
+    const filmsData = await response.json();
 
   if (filmsData.Response === "True") {
   const details = await Promise.all(
@@ -20,8 +19,6 @@ const searchBar = document.querySelector.getElementById('search__input')
     ),
   );
   
-  const runtimeSlider = document.querySelector(".runtime__slider");
-
   filmEl.innerHTML = details
     .map((data) => {
       const runtime = parseInt(data.runtime);
@@ -59,9 +56,9 @@ const searchBar = document.querySelector.getElementById('search__input')
           </div>
         </div>`}).join("");
     } else {
-        filmEl.innerHTML = `<p>${films.Data.Wrror}<p>`;
-    }
-}
+        filmEl.innerHTML = `<p>${films.Data.Error}<p>`;
+    
+const runtimeSlider = document.querySelector(".runtime__slider");
 
   runtimeSlider
     .addEventListener("input", (event) => {
@@ -105,10 +102,10 @@ const searchBar = document.querySelector.getElementById('search__input')
           </div>
         </div>`,
       );
-    })
-    .join("");
+    )
+    .join("")};
 
 fetchFilms("batman");
-}
+}}
 
 main();
