@@ -29,6 +29,9 @@ async function main() {
   });
   async function fetchFilms(query) {
     setLoading(true);
+    await new Promise((resolve) => {
+  setTimeout(resolve, 1000);
+});
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=7974a547&s=${query}`,
     );
