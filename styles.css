@@ -267,8 +267,9 @@ header {
   margin-right: 12px;
 }
 
-.film__rating {
-
+.film__rating--wrapper {
+  display: flex;
+  align-items: center;
 }
 
 .film__rating--logo {
