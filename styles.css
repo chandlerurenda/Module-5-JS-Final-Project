@@ -239,7 +239,7 @@ header {
 }
 
 .film__title:hover {
-    border-bottom: 2px solid 
+  border-bottom: 2px solid;
 }
 
 .film__year {
@@ -256,12 +256,22 @@ header {
   font-size: 20px;
 }
 
-.media__type {
+.media__type--wrapper {
   display: flex;
   align-items: center;
 }
 
 .media__type--logo {
+  height: 28px;
+  width: 28px;
+  margin-right: 12px;
+}
+
+.film__rating {
+
+}
+
+.film__rating--logo {
   height: 28px;
   width: 28px;
   margin-right: 12px;
@@ -283,5 +293,5 @@ header {
 }
 
 .film__duration--number {
-    font-size: 18px;
+  font-size: 18px;
 }
