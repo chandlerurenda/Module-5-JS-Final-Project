@@ -3,14 +3,21 @@
 
 async function main() {
   const searchBar = document.querySelector(".search__input");
-  const submitBtn = document.querySelector(".submit__Btn");
+  const submitBtn = document.querySelector(".submit__btn");
+  const searchForm = document.querySelector(".searchForm")
   const filmEl = document.querySelector(".films");
 
+  searchForm.addEventListener('submit', async(event) => {
+    event.preventDefault();
+    const currentText = searchBar.value;
+    console.log(currentText)
+    await fetchFilms(currentText)
+  });
   submitBtn.addEventListener('click', async () => {
     const currentText = searchBar.value;
     console.log(currentText)
     await fetchFilms(currentText)
-  })
+  });
   async function fetchFilms(query) {
     const response = await fetch(
       `http://www.omdbapi.com/?apikey=7974a547&s=${query}`,
@@ -114,7 +121,7 @@ async function main() {
       filmEl.innerHTML = `<p>${filmsData.Error}<p>`;
     }
   }
-  fetchFilms("batman")
+  fetchFilms("")
 }
 
 main();
