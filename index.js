@@ -2,27 +2,29 @@
 // http://img.omdbapi.com/?apikey=7974a547&
 
 async function main() {
-const searchBar = document.querySelector(".search__input")
+  const searchBar = document.querySelector(".search__input");
   const films = await fetch("http://www.omdbapi.com/?apikey=7974a547&s=batman");
   const filmEl = document.querySelector(".films");
 
   async function fetchFilms(query) {
-    const response = await fetch(`http://www.omdbapi.com/?apikey=7974a547&s=${query}`);
+    const response = await fetch(
+      `http://www.omdbapi.com/?apikey=7974a547&s=${query}`,
+    );
     const filmsData = await response.json();
 
-  if (filmsData.Response === "True") {
-  const details = await Promise.all(
-    filmsData.Search.map((film) =>
-      fetch(`https://www.omdbapi.com/?apikey=7974a547&i=${film.imdbID}`).then(
-        (res) => res.json(),
-      ),
-    ),
-  );
-  
-  filmEl.innerHTML = details
-    .map((data) => {
-      const runtime = parseInt(data.runtime);
-      return `<div class="film">
+    if (filmsData.Response === "True") {
+      const details = await Promise.all(
+        filmsData.Search.map((film) =>
+          fetch(
+            `https://www.omdbapi.com/?apikey=7974a547&i=${film.imdbID}`,
+          ).then((res) => res.json()),
+        ),
+      );
+
+      filmEl.innerHTML = details
+        .map((data) => {
+          const runtime = parseInt(data.runtime);
+          return `<div class="film">
           <figure class="film__img--wrapper">
             <img class="film__img" src="${data.Poster}" alt="" />
           </figure>
@@ -54,21 +56,20 @@ const searchBar = document.querySelector(".search__input")
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
-        </div>`}).join("");
-    } else {
-        filmEl.innerHTML = `<p>${films.Data.Error}<p>`;
-    
-const runtimeSlider = document.querySelector(".runtime__slider");
+        </div>`;
+        })
+        .join("");
+      const runtimeSlider = document.querySelector(".runtime__slider");
 
-  runtimeSlider
-    .addEventListener("input", (event) => {
-      const selectedRuntime = parseInt(event.target.value);
-      const filteredFilms = details.filter(
-        (data) => parseInt(data.Runtime) <= selectedRuntime,
-      );
-      filmEl.innerHTML = filteredFilms.map(
-        (data) =>
-          `<div class="film">
+      runtimeSlider.addEventListener("input", (event) => {
+        const selectedRuntime = parseInt(event.target.value);
+        const filteredFilms = details.filter(
+          (data) => parseInt(data.Runtime) <= selectedRuntime,
+        );
+        filmEl.innerHTML = filteredFilms
+          .map(
+            (data) =>
+              `<div class="film">
           <figure class="film__img--wrapper">
             <img class="film__img" src="${data.Poster}" alt="" />
           </figure>
@@ -101,11 +102,14 @@ const runtimeSlider = document.querySelector(".runtime__slider");
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
         </div>`,
-      );
-    )
-    .join("")};
+          )
+          .join("");
+      });
+    } else {
+      filmEl.innerHTML = `<p>${filmsData.Error}<p>`;
+    }
   }
-fetchFilms("batman");
+  fetchFilms("batman");
 }
 
 main();
