@@ -215,6 +215,7 @@ header {
 }
 
 .film {
+  width: 25%;
   padding: 24px;
 }
 
@@ -222,6 +223,7 @@ header {
   cursor: pointer;
   transition: all 300ms ease;
   overflow: hidden;
+  width: 100%;
 }
 
 .film__img:hover {
@@ -295,4 +297,10 @@ header {
 
 .film__duration--number {
   font-size: 18px;
+}
+
+.media__type--logo img,
+.film__rating--logo img,
+.film__duration--logo img {
+  width: 100%;
 }

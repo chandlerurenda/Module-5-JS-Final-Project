@@ -15,7 +15,7 @@ async function main(film) {
   );
 
   console.log(filmsData);
-  filmEl.innerHTML = filmsData.Search.map(
+  filmEl.innerHTML = details.map(
     (data) => ` <div class="film">
           <figure class="film__img--wrapper">
             <img class="film__img" src="${data.Poster}" alt="" />
@@ -32,8 +32,8 @@ async function main(film) {
           <div class="media__type--wrapper">
             <div class="media__type--logo">
               <img src="./assets/clapperboard-solid-full.svg" alt="" />
-              <div class="media__type">${data.Type}</div>
             </div>
+            <div class="media__type">${data.Type}</div>
           </div>
           <div class="film__rating--wrapper">
             <div class="film__rating--logo">
