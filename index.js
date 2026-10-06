@@ -214,7 +214,7 @@ async function main() {
         
         return `<div class="film">
           <figure class="film__img--wrapper">
-            <img class="film__img" src="${poster}" alt="${data.title};
+            <img class="film__img" src="${poster}" alt="${data.Title}";
             onerror="this.src='./assets/no-poster.jpg'"/>
           </figure>
           <div class="film__title">${data.Title}</div>

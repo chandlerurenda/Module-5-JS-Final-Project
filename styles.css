@@ -101,6 +101,7 @@ a {
 }
 
 .nav__link--primary {
+  display: inline-block;
   color: #fff;
   border: 2px solid #fff;
   padding: 8px 12px;
