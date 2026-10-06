@@ -68,7 +68,17 @@ async function main() {
     } finally {
       setLoading(false);
     }
-  }
+  
+    const filmElements = document.querySelectorAll('.film');
+   filmElements.forEach((film, index) => {
+          film.classList.add("show")
+          film.style.transitionDelay = `${index * .2}s`
+          film.classList.add("film");
+          setTimeout(() => {
+            film.style.opacity = 1;
+          }, index * 200)
+      });
+    }
 
   function renderFilms(filmList) {
     if (!filmList || !filmList.length) {
@@ -111,9 +121,12 @@ async function main() {
         </div>`
       })
       .join("");
+     
        
   }
   fetchFilms("Dune");
+
+
 }
 
 
