@@ -108,12 +108,14 @@ async function main() {
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
-        </div>`;
+        </div>`
       })
       .join("");
+       
   }
   fetchFilms("Dune");
 }
+
 
 
 main();

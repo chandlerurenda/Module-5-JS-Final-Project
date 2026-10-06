@@ -222,10 +222,15 @@ header {
   flex-wrap: wrap;
   justify-content: space-between;
   padding: 24px 24px;
+  opacity: 1;
+  transform: translateY(0px);
+  transition: all 500ms ease;
+
 }
 
 .films__hide {
-  display: none;
+  opacity: 0;
+  transform: translateY(20px);
 }
 
 .film {
@@ -331,3 +336,4 @@ header {
 .film__duration--logo img {
   width: 100%;
 }
+
