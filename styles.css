@@ -186,6 +186,10 @@ header {
   outline: none;
 }
 
+.search-info {
+  font-size: 40px;
+}
+
 /* SEARCH RESULTS SECTION */
 
 #search__results {
@@ -193,9 +197,13 @@ header {
 }
 
 .error-message {
-  font-size:  30px;
+  font-size:  40px;
+  width: 100%;
+  display: flex;
   justify-content: center;
   align-items: center;
+  margin-top: 96px;
+  font-weight: 700;
 }
 
 .filter__content--wrapper {
@@ -231,6 +239,7 @@ header {
   opacity: 1;
   transform: translateY(0px);
   transition: all 500ms ease;
+  margin-top: 72px;
 
 }
 
