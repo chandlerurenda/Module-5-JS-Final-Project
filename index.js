@@ -217,12 +217,12 @@ async function main() {
           <div class="film__title">${data.Title}</div>
           <div class="film__year">
             <img class="film__year--logo"
-              src="./assets/calendar-days-solid-full.svg" alt=""/>
+              src="./assets/calendar-days-regular.svg" alt=""/>
             <div class="film__year--number">${data.Year}</div>
           </div>
           <div class="media__type--wrapper">
             <div class="media__type--logo">
-              <img src="./assets/clapperboard-solid-full.svg" alt="" />
+              <img src="./assets/clapperboard-solid.svg" alt="" />
             </div>
             <div class="media__type">${data.Type}</div>
           </div>
@@ -235,7 +235,7 @@ async function main() {
           </div>
           <div class="film__duration">
             <div class="film__duration--logo">
-              <img src="./assets/clock-regular-full.svg" alt="" />
+              <img src="./assets/clock-regular.svg" alt="" />
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
