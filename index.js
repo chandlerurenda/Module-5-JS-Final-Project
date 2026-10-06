@@ -14,6 +14,126 @@ function setLoading(loading) {
   }
 }
 
+const canvas = document.getElementById('starry-bg');
+const ctx = canvas.getContext('2d');
+
+let stars = [];
+let shootingStars = [];
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+  initStars();
+}
+
+// Generate stars
+function initStars() {
+  stars = [];
+  const count = Math.floor((canvas.width * canvas.height) / 3000); // Scale with screen size
+  for (let i = 0; i < count; i++) {
+    stars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * canvas.height,
+      radius: Math.random() * 1.5 + 0.5,
+      alpha: Math.random(),
+      speed: Math.random() * 0.02 + 0.005,
+      twinkleDir: Math.random() < 0.5 ? 1 : -1
+    });
+  }
+}
+
+// Draw Gradient Background & Stars
+function drawBackground() {
+  // Deep space radial gradient
+  const gradient = ctx.createRadialGradient(
+    canvas.width / 2, canvas.height / 2, 0,
+    canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
+  );
+  gradient.addColorStop(0, '#0f172a');
+  gradient.addColorStop(0.5, '#090d16');
+  gradient.addColorStop(1, '#020408');
+
+  ctx.fillStyle = gradient;
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
+}
+
+function updateAndDrawStars() {
+  stars.forEach(star => {
+    // Twinkle effect
+    star.alpha += star.speed * star.twinkleDir;
+    if (star.alpha >= 1) {
+      star.alpha = 1;
+      star.twinkleDir = -1;
+    } else if (star.alpha <= 0.2) {
+      star.alpha = 0.2;
+      star.twinkleDir = 1;
+    }
+
+    ctx.beginPath();
+    ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
+    ctx.shadowBlur = star.radius * 2;
+    ctx.shadowColor = '#ffffff';
+    ctx.fill();
+    ctx.shadowBlur = 0; // Reset blur for performance
+  });
+}
+
+// Spawn occasional Shooting Stars
+function handleShootingStars() {
+  if (Math.random() < 0.015 && shootingStars.length < 3) {
+    shootingStars.push({
+      x: Math.random() * canvas.width,
+      y: Math.random() * (canvas.height / 2),
+      length: Math.random() * 80 + 40,
+      speed: Math.random() * 10 + 6,
+      angle: Math.PI / 4, // 45 degrees
+      opacity: 1
+    });
+  }
+
+  for (let i = shootingStars.length - 1; i >= 0; i--) {
+    let s = shootingStars[i];
+    
+    let endX = s.x - Math.cos(s.angle) * s.length;
+    let endY = s.y - Math.sin(s.angle) * s.length;
+
+    let grad = ctx.createLinearGradient(s.x, s.y, endX, endY);
+    grad.addColorStop(0, `rgba(255, 255, 255, ${s.opacity})`);
+    grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+
+    ctx.strokeStyle = grad;
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(s.x, s.y);
+    ctx.lineTo(endX, endY);
+    ctx.stroke();
+
+    s.x += Math.cos(s.angle) * s.speed;
+    s.y += Math.sin(s.angle) * s.speed;
+    s.opacity -= 0.01;
+
+    if (s.opacity <= 0 || s.x > canvas.width || s.y > canvas.height) {
+      shootingStars.splice(i, 1);
+    }
+  }
+}
+
+// Main Animation Loop
+function animate() {
+  drawBackground();
+  updateAndDrawStars();
+  handleShootingStars();
+  requestAnimationFrame(animate);
+}
+
+// Event Listeners
+window.addEventListener('resize', resizeCanvas);
+
+// Initialize
+resizeCanvas();
+animate();
+
 async function main() {
   const searchBar = document.querySelector(".search__input");
   const searchForm = document.querySelector(".searchForm");
