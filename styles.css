@@ -192,6 +192,12 @@ header {
   min-height: 40vh;
 }
 
+.error-message {
+  font-size:  30px;
+  justify-content: center;
+  align-items: center;
+}
+
 .filter__content--wrapper {
   display: flex;
   align-items: center;

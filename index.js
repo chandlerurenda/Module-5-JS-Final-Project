@@ -61,10 +61,10 @@ async function main() {
         };
       }
       } else {
-        filmEl.innerHTML = `<p class = "error-msg">${filmsData.Error}</p>`;
+        renderErrorMessage("Sorry, no films matched your search criteria. Please try again!")
       }
     } catch (error) {
-      filmEl.innerHTML = `<p class="error-msg">Something Went wrong. Please Try again</p>`;
+      filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
     } finally {
       setLoading(false);
     }
@@ -80,11 +80,12 @@ async function main() {
       });
     }
 
-  function renderFilms(filmList) {
-    if (!filmList || !filmList.length) {
-      filmEl.innerHTML = `<p>No films match your search/filter criteria</p>`;
-      return;
+
+    function renderErrorMessage(message) {
+      filmEl.innerHTML = `<p class="error-message">${message}</p>`;
     }
+    
+  function renderFilms(filmList) {
 
     filmEl.innerHTML = filmList
       .map((data) => {
