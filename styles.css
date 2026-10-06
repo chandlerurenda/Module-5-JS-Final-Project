@@ -274,7 +274,7 @@ header {
 }
 
 .films__loading--show {
-  display: block;
+  display: flex;
 }
 
 .media__type--wrapper {

@@ -4,6 +4,7 @@
 function setLoading(loading) {
   const loadingEl = document.querySelector(".films__loading");
   const filmsEl = document.querySelector(".films");
+  filmsEl.classList.remove(".films")
 
   if (loading) {
     loadingEl.classList.add("films__loading--show");
