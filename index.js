@@ -209,10 +209,13 @@ async function main() {
 
     filmEl.innerHTML = filmList
       .map((data) => {
+
+        const poster = data.Poster !== "N/A" ? data.Poster : "./assets/no-poster.jpg";
         
         return `<div class="film">
           <figure class="film__img--wrapper">
-            <img class="film__img" src="${data.Poster}";
+            <img class="film__img" src="${poster}" alt="${data.title};
+            onerror="this.src='./assets/no-poster.jpg'"/>
           </figure>
           <div class="film__title">${data.Title}</div>
           <div class="film__year">
