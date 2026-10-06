@@ -224,6 +224,10 @@ header {
   padding: 24px 24px;
 }
 
+.films__hide {
+  display: none;
+}
+
 .film {
   width: 25%;
   padding: 24px;

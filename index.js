@@ -4,12 +4,13 @@
 function setLoading(loading) {
   const loadingEl = document.querySelector(".films__loading");
   const filmsEl = document.querySelector(".films");
-  filmsEl.classList.remove(".films")
-
+ 
   if (loading) {
     loadingEl.classList.add("films__loading--show");
+    filmsEl.classList.add("films__hide");
   } else {
     loadingEl.classList.remove("films__loading--show");
+    filmsEl.classList.remove("films__hide");
   }
 }
 
