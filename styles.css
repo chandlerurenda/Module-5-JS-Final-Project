@@ -142,7 +142,7 @@ a {
   display: flex;
   height: 120px;
   width: 160px;
-  opacity: .85;
+  opacity: 0.85;
 }
 
 header {
@@ -219,7 +219,7 @@ header {
 /* SEARCH RESULTS SECTION */
 
 #search__results {
-  min-height: 40vh;
+  min-height: 70vh;
 }
 
 .error-message {
@@ -338,6 +338,7 @@ header {
 
 .films__loading--show {
   display: flex;
+  color: #fff;
 }
 
 .media__type--wrapper {
@@ -375,7 +376,7 @@ header {
 .film__duration {
   display: flex;
   align-items: center;
-  color: #fff
+  color: #fff;
 }
 
 .film__duration--logo {
@@ -396,14 +397,40 @@ header {
 
 /* FOOTER SECTION */
 
-/* .footer {
-  min-height: 20vh;
+.footer {
+ display: block;
+ overflow: hidden;
+}
+
+footer a {
+
+  display: inline-block;
+}
+
+.footer__container {
+  margin-top: 20px;
+  height: 10vh;
+  width: 100%;
+}
+.footer__row {
+  padding: 0 32px;
 }
 
 .footer__links {
-
+  display: flex;
+  flex-direction: column;
 }
 
-.footter__link {
-  color: #fff;
-} */
+.footer__link {
+  color: #ffffff;
+}
+
+/* Responsiveness & Media Queries */
+
+@media (width > 1440px) {
+  .landing__overlay {
+    max-width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
