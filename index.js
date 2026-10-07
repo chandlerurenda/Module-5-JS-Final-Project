@@ -190,11 +190,15 @@ async function main() {
         if (runtimeSlider) {
           runtimeSlider.oninput = (event) => {
             const selectedRuntime = parseInt(event.target.value, 10);
-            const filteredFilms = validDetails.filter((data) => {
-              const filmRuntime = parseInt(data.Runtime, 10) || 0;
-              return filmRuntime <= selectedRuntime;
+            const filmElements = document.querySelectorAll(".film");
+            filmElements.forEach((film, index) => {
+              const filmRuntime = parseInt(validDetails[index].Runtime, 10) || 0;
+              if (filmRuntime <= selectedRuntime) {
+                film.style.display = "";
+              } else {(filmRuntime >= selectedRuntime)
+                film.style.display = "none";
+              }
             });
-            renderFilms(filteredFilms);
           };
         }
       } else {
@@ -204,7 +208,7 @@ async function main() {
       filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
     } finally {
       setLoading(false);
-    };
+    }
   }
 
   function renderErrorMessage(message) {
@@ -249,11 +253,11 @@ async function main() {
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
-        </div>`
+        </div>`;
       })
       .join("");
 
-      const filmElements = document.querySelectorAll(".film");
+    const filmElements = document.querySelectorAll(".film");
     filmElements.forEach((film, index) => {
       film.classList.add("show");
       film.style.transitionDelay = `${index * 0.2}s`;
@@ -263,7 +267,6 @@ async function main() {
       }, index * 200);
     });
   }
-
 
   fetchFilms("Dune");
 }
