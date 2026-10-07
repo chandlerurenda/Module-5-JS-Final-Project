@@ -4,7 +4,7 @@
 function setLoading(loading) {
   const loadingEl = document.querySelector(".films__loading");
   const filmsEl = document.querySelector(".films");
- 
+
   if (loading) {
     loadingEl.classList.add("films__loading--show");
     filmsEl.classList.add("films__hide");
@@ -14,8 +14,8 @@ function setLoading(loading) {
   }
 }
 
-const canvas = document.getElementById('starry-bg');
-const ctx = canvas.getContext('2d');
+const canvas = document.getElementById("starry-bg");
+const ctx = canvas.getContext("2d");
 
 let stars = [];
 let shootingStars = [];
@@ -37,7 +37,7 @@ function initStars() {
       radius: Math.random() * 1.5 + 0.5,
       alpha: Math.random(),
       speed: Math.random() * 0.02 + 0.005,
-      twinkleDir: Math.random() < 0.5 ? 1 : -1
+      twinkleDir: Math.random() < 0.5 ? 1 : -1,
     });
   }
 }
@@ -46,19 +46,23 @@ function initStars() {
 function drawBackground() {
   // Deep space radial gradient
   const gradient = ctx.createRadialGradient(
-    canvas.width / 2, canvas.height / 2, 0,
-    canvas.width / 2, canvas.height / 2, Math.max(canvas.width, canvas.height)
+    canvas.width / 2,
+    canvas.height / 2,
+    0,
+    canvas.width / 2,
+    canvas.height / 2,
+    Math.max(canvas.width, canvas.height),
   );
-  gradient.addColorStop(0, '#0f172a');
-  gradient.addColorStop(0.5, '#090d16');
-  gradient.addColorStop(1, '#020408');
+  gradient.addColorStop(0, "#0f172a");
+  gradient.addColorStop(0.5, "#090d16");
+  gradient.addColorStop(1, "#020408");
 
   ctx.fillStyle = gradient;
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 }
 
 function updateAndDrawStars() {
-  stars.forEach(star => {
+  stars.forEach((star) => {
     // Twinkle effect
     star.alpha += star.speed * star.twinkleDir;
     if (star.alpha >= 1) {
@@ -73,7 +77,7 @@ function updateAndDrawStars() {
     ctx.arc(star.x, star.y, star.radius, 0, Math.PI * 2);
     ctx.fillStyle = `rgba(255, 255, 255, ${star.alpha})`;
     ctx.shadowBlur = star.radius * 2;
-    ctx.shadowColor = '#ffffff';
+    ctx.shadowColor = "#ffffff";
     ctx.fill();
     ctx.shadowBlur = 0; // Reset blur for performance
   });
@@ -88,19 +92,19 @@ function handleShootingStars() {
       length: Math.random() * 80 + 40,
       speed: Math.random() * 10 + 6,
       angle: Math.PI / 4, // 45 degrees
-      opacity: 1
+      opacity: 1,
     });
   }
 
   for (let i = shootingStars.length - 1; i >= 0; i--) {
     let s = shootingStars[i];
-    
+
     let endX = s.x - Math.cos(s.angle) * s.length;
     let endY = s.y - Math.sin(s.angle) * s.length;
 
     let grad = ctx.createLinearGradient(s.x, s.y, endX, endY);
     grad.addColorStop(0, `rgba(255, 255, 255, ${s.opacity})`);
-    grad.addColorStop(1, 'rgba(255, 255, 255, 0)');
+    grad.addColorStop(1, "rgba(255, 255, 255, 0)");
 
     ctx.strokeStyle = grad;
     ctx.lineWidth = 2;
@@ -128,7 +132,7 @@ function animate() {
 }
 
 // Event Listeners
-window.addEventListener('resize', resizeCanvas);
+window.addEventListener("resize", resizeCanvas);
 
 // Initialize
 resizeCanvas();
@@ -154,64 +158,77 @@ async function main() {
       await new Promise((resolve) => setTimeout(resolve, 2000));
 
       const response = await fetch(
-        `https://www.omdbapi.com/?apikey=7974a547&s=${query}`
+        `https://www.omdbapi.com/?apikey=7974a547&s=${query}`,
       );
+
+      console.log("Search status:", response.status);
       const filmsData = await response.json();
+      console.log("Search response:", filmsData);
 
       if (filmsData.Response === "True") {
         const details = await Promise.all(
           filmsData.Search.map((film) =>
             fetch(
               `https://www.omdbapi.com/?apikey=7974a547&i=${film.imdbID}`,
-            ).then((res) => res.json()),
+            ).then(async (res) => {
+              console.log("Detail status:", res.status);
+
+              const data = await res.json();
+              console.log(data);
+              return data;
+            }),
           ),
         );
 
-        renderFilms(details);
+        const validDetails = details.filter(
+          (data) => data.Response !== "False",
+        );
+
+        renderFilms(validDetails);
 
         const runtimeSlider = document.querySelector(".runtime__slider");
         if (runtimeSlider) {
-        runtimeSlider.oninput = (event) => {
-          const selectedRuntime = parseInt(event.target.value, 10);
-          const filteredFilms = details.filter((data) => {
-            const filmRuntime = parseInt(data.Runtime, 10) || 0;
-            return filmRuntime <= selectedRuntime;
-          });
-          renderFilms(filteredFilms);
-        };
-      }
+          runtimeSlider.oninput = (event) => {
+            const selectedRuntime = parseInt(event.target.value, 10);
+            const filteredFilms = validDetails.filter((data) => {
+              const filmRuntime = parseInt(data.Runtime, 10) || 0;
+              return filmRuntime <= selectedRuntime;
+            });
+            renderFilms(filteredFilms);
+          };
+        }
       } else {
-        renderErrorMessage("Sorry, no films matched your search criteria. Please try again!")
+        renderErrorMessage(filmsData.Error);
       }
     } catch (error) {
       filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
     } finally {
       setLoading(false);
     }
-  
-    const filmElements = document.querySelectorAll('.film');
-   filmElements.forEach((film, index) => {
-          film.classList.add("show")
-          film.style.transitionDelay = `${index * .2}s`
-          film.classList.add("film");
-          setTimeout(() => {
-            film.style.opacity = 1;
-          }, index * 200)
-      });
-    }
 
+    const filmElements = document.querySelectorAll(".film");
+    filmElements.forEach((film, index) => {
+      film.classList.add("show");
+      film.style.transitionDelay = `${index * 0.2}s`;
+      film.classList.add("film");
+      setTimeout(() => {
+        film.style.opacity = 1;
+      }, index * 200);
+    });
+  }
 
-    function renderErrorMessage(message) {
-      filmEl.innerHTML = `<p class="error-message">${message}</p>`;
-    }
-    
+  function renderErrorMessage(message) {
+    filmEl.innerHTML = `<p class="error-message">${message}</p>`;
+  }
+
   function renderFilms(filmList) {
-
     filmEl.innerHTML = filmList
       .map((data) => {
+        const poster =
+          data.Poster && data.Poster !== "N/A"
+            ? data.Poster
+            : "./assets/no-poster.jpg";
 
-        const poster = data.Poster !== "N/A" ? data.Poster : "./assets/no-poster.jpg";
-        
         return `<div class="film">
           <figure class="film__img--wrapper">
             <img class="film__img" src="${poster}" alt="${data.Title}";
@@ -242,17 +259,10 @@ async function main() {
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
-        </div>`
+        </div>`;
       })
       .join("");
-     
-       
   }
   fetchFilms("Dune");
-
-
 }
-
-
-
 main();
