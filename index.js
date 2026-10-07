@@ -138,131 +138,134 @@ window.addEventListener("resize", resizeCanvas);
 resizeCanvas();
 animate();
 
-// async function main() {
-//   const searchBar = document.querySelector(".search__input");
-//   const searchForm = document.querySelector(".searchForm");
-//   const filmEl = document.querySelector(".films");
+async function main() {
+  const searchBar = document.querySelector(".search__input");
+  const searchForm = document.querySelector(".searchForm");
+  const filmEl = document.querySelector(".films");
 
-//   searchForm.addEventListener("submit", async (event) => {
-//     event.preventDefault();
-//     const currentText = searchBar.value.trim();
-//     if (currentText) {
-//       await fetchFilms(currentText);
-//     }
-//   });
+  searchForm.addEventListener("submit", async (event) => {
+    event.preventDefault();
+    const currentText = searchBar.value.trim();
+    if (currentText) {
+      await fetchFilms(currentText);
+    }
+  });
 
-//   async function fetchFilms(query) {
-//     setLoading(true);
+  async function fetchFilms(query) {
+    setLoading(true);
 
-//     try {
-//       await new Promise((resolve) => setTimeout(resolve, 2000));
+    try {
+      await new Promise((resolve) => setTimeout(resolve, 2000));
 
-//       const response = await fetch(
-//         `https://www.omdbapi.com/?apikey=7974a547&s=${query}`,
-//       );
+      const response = await fetch(
+        `https://www.omdbapi.com/?apikey=7974a547&s=${query}`,
+      );
 
-//       console.log("Search status:", response.status);
-//       const filmsData = await response.json();
-//       console.log("Search response:", filmsData);
+      console.log("Search status:", response.status);
+      const filmsData = await response.json();
+      console.log("Search response:", filmsData);
 
-//       if (filmsData.Response === "True") {
-//         const details = await Promise.all(
-//           filmsData.Search.map((film) =>
-//             fetch(
-//               `https://www.omdbapi.com/?apikey=7974a547&i=${film.imdbID}`,
-//             ).then(async (res) => {
-//               console.log("Detail status:", res.status);
+      if (filmsData.Response === "True") {
+        const details = await Promise.all(
+          filmsData.Search.map((film) =>
+            fetch(
+              `https://www.omdbapi.com/?apikey=7974a547&i=${film.imdbID}`,
+            ).then(async (res) => {
+              console.log("Detail status:", res.status);
 
-//               const data = await res.json();
-//               console.log(data);
-//               return data;
-//             }),
-//           ),
-//         );
+              const data = await res.json();
+              console.log(data);
+              return data;
+            }),
+          ),
+        );
 
-//         const validDetails = details.filter(
-//           (data) => data.Response !== "False",
-//         );
+        const validDetails = details.filter(
+          (data) => data.Response !== "False",
+        );
 
-//         renderFilms(validDetails);
+        renderFilms(validDetails);
 
-//         const runtimeSlider = document.querySelector(".runtime__slider");
-//         if (runtimeSlider) {
-//           runtimeSlider.oninput = (event) => {
-//             const selectedRuntime = parseInt(event.target.value, 10);
-//             const filteredFilms = validDetails.filter((data) => {
-//               const filmRuntime = parseInt(data.Runtime, 10) || 0;
-//               return filmRuntime <= selectedRuntime;
-//             });
-//             renderFilms(filteredFilms);
-//           };
-//         }
-//       } else {
-//         renderErrorMessage(filmsData.Error);
-//       }
-//     } catch (error) {
-//       filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
-//     } finally {
-//       setLoading(false);
-//     }
+        const runtimeSlider = document.querySelector(".runtime__slider");
+        if (runtimeSlider) {
+          runtimeSlider.oninput = (event) => {
+            const selectedRuntime = parseInt(event.target.value, 10);
+            const filteredFilms = validDetails.filter((data) => {
+              const filmRuntime = parseInt(data.Runtime, 10) || 0;
+              return filmRuntime <= selectedRuntime;
+            });
+            renderFilms(filteredFilms);
+          };
+        }
+      } else {
+        renderErrorMessage(filmsData.Error);
+      }
+    } catch (error) {
+      filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
+    } finally {
+      setLoading(false);
+    };
+  }
 
-//     const filmElements = document.querySelectorAll(".film");
-//     filmElements.forEach((film, index) => {
-//       film.classList.add("show");
-//       film.style.transitionDelay = `${index * 0.2}s`;
-//       film.classList.add("film");
-//       setTimeout(() => {
-//         film.style.opacity = 1;
-//       }, index * 200);
-//     });
-//   }
+  function renderErrorMessage(message) {
+    filmEl.innerHTML = `<p class="error-message">${message}</p>`;
+  }
 
-//   function renderErrorMessage(message) {
-//     filmEl.innerHTML = `<p class="error-message">${message}</p>`;
-//   }
+  function renderFilms(filmList) {
+    filmEl.innerHTML = filmList
+      .map((data) => {
+        const poster =
+          data.Poster && data.Poster !== "N/A"
+            ? data.Poster
+            : "./assets/no-poster.jpg";
 
-//   function renderFilms(filmList) {
-//     filmEl.innerHTML = filmList
-//       .map((data) => {
-//         const poster =
-//           data.Poster && data.Poster !== "N/A"
-//             ? data.Poster
-//             : "./assets/no-poster.jpg";
+        return `<div class="film">
+          <figure class="film__img--wrapper">
+            <img class="film__img" src="${poster}" alt="${data.Title}";
+            onerror="this.src='./assets/no-poster.jpg'"/>
+          </figure>
+          <div class="film__title">${data.Title}</div>
+          <div class="film__year">
+            <img class="film__year--logo"
+              src="./assets/calendar-days-regular.svg" alt=""/>
+            <div class="film__year--number">${data.Year}</div>
+          </div>
+          <div class="media__type--wrapper">
+            <div class="media__type--logo">
+              <img src="./assets/clapperboard-solid.svg" alt="" />
+            </div>
+            <div class="media__type">${data.Type}</div>
+          </div>
+          <div class="film__rating--wrapper">
+            <div class="film__rating--logo">
+              <img src="./assets/star-solid-full.svg" alt="" />
+            </div>
+            <div class="film__rating--number">${data.imdbRating}/10</div>
+            <!-- Closing tag fixed here -->
+          </div>
+          <div class="film__duration">
+            <div class="film__duration--logo">
+              <img src="./assets/clock-regular.svg" alt="" />
+            </div>
+            <div class="film__duration--number">${data.Runtime}</div>
+          </div>
+        </div>`
+      })
+      .join("");
 
-//         return `<div class="film">
-//           <figure class="film__img--wrapper">
-//             <img class="film__img" src="${poster}" alt="${data.Title}";
-//             onerror="this.src='./assets/no-poster.jpg'"/>
-//           </figure>
-//           <div class="film__title">${data.Title}</div>
-//           <div class="film__year">
-//             <img class="film__year--logo"
-//               src="./assets/calendar-days-regular.svg" alt=""/>
-//             <div class="film__year--number">${data.Year}</div>
-//           </div>
-//           <div class="media__type--wrapper">
-//             <div class="media__type--logo">
-//               <img src="./assets/clapperboard-solid.svg" alt="" />
-//             </div>
-//             <div class="media__type">${data.Type}</div>
-//           </div>
-//           <div class="film__rating--wrapper">
-//             <div class="film__rating--logo">
-//               <img src="./assets/star-solid-full.svg" alt="" />
-//             </div>
-//             <div class="film__rating--number">${data.imdbRating}/10</div>
-//             <!-- Closing tag fixed here -->
-//           </div>
-//           <div class="film__duration">
-//             <div class="film__duration--logo">
-//               <img src="./assets/clock-regular.svg" alt="" />
-//             </div>
-//             <div class="film__duration--number">${data.Runtime}</div>
-//           </div>
-//         </div>`;
-//       })
-//       .join("");
-//   }
-//   fetchFilms("Dune");
-// }
-// main();
+      const filmElements = document.querySelectorAll(".film");
+    filmElements.forEach((film, index) => {
+      film.classList.add("show");
+      film.style.transitionDelay = `${index * 0.2}s`;
+      film.classList.add("film");
+      setTimeout(() => {
+        film.style.opacity = 1;
+      }, index * 200);
+    });
+  }
+
+
+  fetchFilms("Dune");
+}
+
+main();
