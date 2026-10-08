@@ -187,20 +187,23 @@ async function main() {
 
         const runtimeSlider = document.querySelector(".runtime__slider");
         if (runtimeSlider) {
+          const runtimeCurrent = document.querySelector(".runtime__current");
           runtimeSlider.oninput = (event) => {
+            runtimeCurrent.textContent = `${selectedRuntime} min`;
             const selectedRuntime = parseInt(event.target.value, 10);
             const filmElements = document.querySelectorAll(".film");
             const firstPositions = new Map();
             filmElements.forEach((film) => {
-            if (film.style.display !== "none") {
-              const rect = film.getBoundingClientRect();
-              firstPositions.set(film, rect);
-              console.log(rect.x, rect.y);
-            }
-            })
+              if (film.style.display !== "none") {
+                const rect = film.getBoundingClientRect();
+                firstPositions.set(film, rect);
+                console.log(rect.x, rect.y);
+              }
+            });
 
             filmElements.forEach((film, index) => {
-              const filmRuntime = parseInt(validDetails[index].Runtime, 10) || 0;
+              const filmRuntime =
+                parseInt(validDetails[index].Runtime, 10) || 0;
               if (filmRuntime <= selectedRuntime) {
                 film.style.display = "";
               } else {
@@ -212,13 +215,16 @@ async function main() {
               if (film.style.display !== "none") {
                 const rect = film.getBoundingClientRect();
                 lastPositions.set(film, rect);
-                console.log(rect.x, rect.y)
+                console.log(rect.x, rect.y);
                 const first = firstPositions.get(film);
                 const last = lastPositions.get(film);
-                console.log(first.x - last.x);
-                console.log(first.y - last.y);
+                if (first && last) {
+                  const deltaX = (first.x - last.x);
+                  const deltaY = (first.y - last.y);
+                  film.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+                }
               }
-            })
+            });
           };
         }
       } else {
