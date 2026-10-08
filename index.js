@@ -215,7 +215,8 @@ async function main() {
                 console.log(rect.x, rect.y)
                 const first = firstPositions.get(film);
                 const last = lastPositions.get(film);
-                console.log(first - last);
+                console.log(first.x - last.x);
+                console.log(first.y - last.y);
               }
             })
           };
