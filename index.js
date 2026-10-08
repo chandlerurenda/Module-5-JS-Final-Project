@@ -174,7 +174,6 @@ async function main() {
               console.log("Detail status:", res.status);
 
               const data = await res.json();
-              console.log(data);
               return data;
             }),
           ),
@@ -191,6 +190,15 @@ async function main() {
           runtimeSlider.oninput = (event) => {
             const selectedRuntime = parseInt(event.target.value, 10);
             const filmElements = document.querySelectorAll(".film");
+            const firstPositions = new Map();
+            filmElements.forEach((film) => {
+            if (film.style.display !== "none") {
+              const rect = film.getBoundingClientRect();
+              firstPositions.set(film, rect);
+              console.log(rect.x, rect.y);
+            }
+            })
+
             filmElements.forEach((film, index) => {
               const filmRuntime = parseInt(validDetails[index].Runtime, 10) || 0;
               if (filmRuntime <= selectedRuntime) {
@@ -199,6 +207,17 @@ async function main() {
                 film.style.display = "none";
               }
             });
+            const lastPositions = new Map();
+            filmElements.forEach((film) => {
+              if (film.style.display !== "none") {
+                const rect = film.getBoundingClientRect();
+                lastPositions.set(film, rect);
+                console.log(rect.x, rect.y)
+                const first = firstPositions.get(film);
+                const last = lastPositions.get(film);
+                console.log(first - last);
+              }
+            })
           };
         }
       } else {
