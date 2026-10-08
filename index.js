@@ -195,7 +195,7 @@ async function main() {
               const filmRuntime = parseInt(validDetails[index].Runtime, 10) || 0;
               if (filmRuntime <= selectedRuntime) {
                 film.style.display = "";
-              } else {(filmRuntime >= selectedRuntime)
+              } else {
                 film.style.display = "none";
               }
             });
