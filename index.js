@@ -215,7 +215,7 @@ async function main() {
               if (film.style.display !== "none") {
                 const rect = film.getBoundingClientRect();
                 lastPositions.set(film, rect);
-                console.log(rect.x, rect.y);
+                // console.log(rect.x, rect.y);
                 const first = firstPositions.get(film);
                 const last = lastPositions.get(film);
                 if (first && last) {
