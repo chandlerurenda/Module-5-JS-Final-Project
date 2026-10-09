@@ -286,7 +286,7 @@ header {
   width: 25%;
   padding: 24px;
   opacity: 0;
-  transform: translateY(-20px);
+  transform: translateY(0px);
   transition: opacity 500ms ease;
 }
 
