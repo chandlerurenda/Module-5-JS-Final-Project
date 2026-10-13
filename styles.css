@@ -74,7 +74,7 @@ a {
   position: absolute;
   top: 0;
   left: 0;
-  Height: 40vh;
+  height: 40vh;
   width: 100%;
   background-image: url("/assets/Dune_1984_Overlay.jpg");
   background-size: cover;
@@ -409,12 +409,11 @@ header {
 /* FOOTER SECTION */
 
 .footer {
- display: block;
- overflow: hidden;
+  display: block;
+  overflow: hidden;
 }
 
 footer a {
-
   display: inline-block;
 }
 
@@ -469,9 +468,45 @@ footer a {
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1240px) {
+  .nav__logo--img {
+    width: 7rem;
+  }
 
+  .nav__link {
+    font-size: 1.2rem;
+  }
+
+  .nav__link--primary {
+    font-size: 1.2rem;
+  }
+
+  .header__title {
+    font-size: 1.5rem;
+  }
+
+  .search__input {
+    font-size: 1rem;
+  }
+
+  .submit {
+    font-size: 1.4rem
+  }
+
+  .search-info {
+    font-size: 1.8rem;
+  }
+
+  .duration__filter--wrapper {
+    font-size: 0.75rem;
+  }
+}
+
+@media (max-width: 1024px) {
   .film {
     width: 50%;
   }
+}
+
+@media (max-width: 768px) {
 }
