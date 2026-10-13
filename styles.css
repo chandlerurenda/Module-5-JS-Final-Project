@@ -430,6 +430,7 @@ footer a {
   display: flex;
   justify-content: space-around;
   margin-bottom: 72px;
+  margin-top: 72px;
 }
 
 .footer__link {
@@ -500,13 +501,46 @@ footer a {
   .duration__filter--wrapper {
     font-size: 0.75rem;
   }
+
 }
 
 @media (max-width: 1024px) {
   .film {
     width: 50%;
   }
+
+   .footer__link {
+    font-size: 1.3rem;
+  }
+
+
 }
 
 @media (max-width: 768px) {
+
+  .header__title {
+    font-size: 1.2rem;
+  }
+
+  .search__input {
+    font-size: .8rem;
+  }
+
+  .film {
+    width: 100%;
+    margin-bottom: 32px;
+  }
+
+  .submit {
+    font-size: 1.1rem;
+  }
+
+  .nav__links {
+    display: none;
+  }
+
+  .nav__logo--img {
+    display: none;
+  }
+
 }
