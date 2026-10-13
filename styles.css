@@ -317,25 +317,39 @@ header {
 }
 
 .film__title {
-  font-size: 36px;
+  font-size: 2.25rem;
+  margin-bottom: .4rem;
   font-weight: bold;
   cursor: not-allowed;
   color: #fff;
 }
 
+.film__details--wrapper {
+  display: flex;
+}
+
+.film__details {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 .film__year {
+  font-size: 1.25rem;
+  margin-right: 4rem;
+  margin-bottom: .4rem;
   display: flex;
   align-items: center;
   color: #fff;
 }
 
 .film__year--logo {
-  height: 28px;
-  margin-right: 12px;
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-right: .75rem;
 }
 
 .film__year--number {
-  font-size: 20px;
+  font-size: 1.25rem;
 }
 
 .films__loading {
@@ -355,33 +369,36 @@ header {
 .media__type--wrapper {
   display: flex;
   align-items: center;
+  margin-right: 4rem;
+  margin-bottom: .4rem;
 }
 
 .media__type {
-  font-size: 20px;
+  font-size: 1.25rem;
   color: #fff;
 }
 
 .media__type--logo {
-  height: 28px;
-  width: 28px;
-  margin-right: 12px;
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-right: .75rem;
 }
 
 .film__rating--wrapper {
   display: flex;
   align-items: center;
   color: #fff;
+  margin-right: 4rem;
 }
 
 .film__rating--logo {
-  height: 28px;
-  width: 28px;
-  margin-right: 12px;
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-right: .75rem;
 }
 
 .film__rating--number {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .film__duration {
@@ -391,13 +408,13 @@ header {
 }
 
 .film__duration--logo {
-  height: 28px;
-  width: 28px;
-  margin-right: 12px;
+  height: 1.75rem;
+  width: 1.75rem;
+  margin-right: .75rem;
 }
 
 .film__duration--number {
-  font-size: 18px;
+  font-size: 1.125rem;
 }
 
 .media__type--logo img,
@@ -533,6 +550,7 @@ footer a {
   .film__img--wrapper {
     margin-bottom: 24px;
   }
+
 
   .film {
     width: 50%;

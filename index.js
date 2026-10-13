@@ -288,8 +288,9 @@ async function main() {
             <img class="film__img" src="${poster}" alt="${data.Title}";
             onerror="this.src='./assets/no-poster.jpg'"/>
           </figure>
-          <div class="film__details--wrapper">
           <div class="film__title">${data.Title}</div>
+          <div class="film__details--wrapper">
+          <div class="film__details">
           <div class="film__year">
             <img class="film__year--logo"
               src="./assets/calendar-days-regular.svg" alt=""/>
@@ -314,8 +315,9 @@ async function main() {
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
+          </div>
         </div>
-        </div>`;
+      </div>`;
       })
       .join("");
 
