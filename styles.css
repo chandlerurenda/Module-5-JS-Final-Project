@@ -277,6 +277,7 @@ header {
   transform: translateY(0px);
   transition: all 500ms ease;
   margin-top: 72px;
+  margin-bottom: 72px;
 }
 
 .films__hide {
@@ -416,7 +417,7 @@ footer a {
 }
 
 .footer__container {
-  margin-top: 48px;
+  margin-top: 72px;
   height: 10vh;
   width: 100%;
 }
@@ -441,8 +442,8 @@ footer a {
 }
 
 .copyright {
-  margin-top: 60px;
-  font-size: 20px;
+  margin-top: 84px;
+  font-size: 16px;
   display: flex;
   align-items: center;
   justify-content: center;
