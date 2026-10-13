@@ -188,18 +188,22 @@ async function main() {
         const runtimeSlider = document.querySelector(".runtime__slider");
         if (runtimeSlider) {
           const runtimeCurrent = document.querySelector(".runtime__current");
+          let debounceTimer;
           runtimeSlider.oninput = (event) => {
-            const selectedRuntime = parseInt(event.target.value, 10);
-            runtimeCurrent.textContent = `${selectedRuntime} min`;
-            const filmElements = document.querySelectorAll(".film");
-            const firstPositions = new Map();
-            filmElements.forEach((film) => {
-              if (film.style.display !== "none") {
-                const rect = film.getBoundingClientRect();
-                firstPositions.set(film, rect);
-                // console.log(rect.x, rect.y);
-              }
-            });
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+              const selectedRuntime = parseInt(event.target.value, 10);
+              runtimeCurrent.textContent = `${selectedRuntime} min`;
+              const filmElements = document.querySelectorAll(".film");
+              const firstPositions = new Map();
+              filmElements.forEach((film) => {
+                if (film.style.display !== "none") {
+                  const rect = film.getBoundingClientRect();
+                  firstPositions.set(film, rect);
+                  // console.log(rect.x, rect.y);
+                }
+              });
+            }, 300);
 
             filmElements.forEach((film, index) => {
               const filmRuntime =
@@ -219,20 +223,17 @@ async function main() {
                 const first = firstPositions.get(film);
                 const last = lastPositions.get(film);
                 if (first && last) {
-                  const deltaX = (first.x - last.x);
-                  const deltaY = (first.y - last.y);
+                  const deltaX = first.x - last.x;
+                  const deltaY = first.y - last.y;
                   film.animate(
                     [
                       { transform: `translate(${deltaX}px, ${deltaY}px)` },
-                      { transform: "translate(0px, 0px)" }
+                      { transform: "translate(0px, 0px)" },
                     ],
-                    { duration: 300,
-                      easing: "ease-out"
-                    }
+                    { duration: 300, easing: "ease-out" },
                   );
                   // console.log(deltaX, deltaY)
                   // film.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
-            
                 }
               }
             });
