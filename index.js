@@ -184,26 +184,25 @@ async function main() {
         );
 
         renderFilms(validDetails);
-
+        
         const runtimeSlider = document.querySelector(".runtime__slider");
         if (runtimeSlider) {
           const runtimeCurrent = document.querySelector(".runtime__current");
           let debounceTimer;
           runtimeSlider.oninput = (event) => {
-            clearTimeout(debounceTimer);
-            debounceTimer = setTimeout(() => {
-              const selectedRuntime = parseInt(event.target.value, 10);
-              runtimeCurrent.textContent = `${selectedRuntime} min`;
+              const value = parseInt(event.target.value, 10);
+              runtimeCurrent.textContent = `${value} min`;
+              clearTimeout(debounceTimer);
+              debounceTimer = setTimeout(() => {
+              const selectedRuntime = value
               const filmElements = document.querySelectorAll(".film");
               const firstPositions = new Map();
               filmElements.forEach((film) => {
                 if (film.style.display !== "none") {
                   const rect = film.getBoundingClientRect();
                   firstPositions.set(film, rect);
-                  // console.log(rect.x, rect.y);
                 }
               });
-            }, 300);
 
             filmElements.forEach((film, index) => {
               const filmRuntime =
@@ -219,7 +218,6 @@ async function main() {
               if (film.style.display !== "none") {
                 const rect = film.getBoundingClientRect();
                 lastPositions.set(film, rect);
-                // console.log(rect.x, rect.y);
                 const first = firstPositions.get(film);
                 const last = lastPositions.get(film);
                 if (first && last) {
@@ -232,22 +230,22 @@ async function main() {
                     ],
                     { duration: 300, easing: "ease-out" },
                   );
-                  // console.log(deltaX, deltaY)
-                  // film.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
                 }
               }
             });
-          };
-        }
+          }, 300);
+        };
+      }
       } else {
         renderErrorMessage(filmsData.Error);
       }
-    } catch (error) {
-      filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
-    } finally {
+    
+      } catch (error) {
+       filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
+      } finally {
       setLoading(false);
+      }
     }
-  }
 
   function renderErrorMessage(message) {
     filmEl.innerHTML = `<p class="error-message">${message}</p>`;
