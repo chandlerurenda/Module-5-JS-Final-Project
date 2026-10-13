@@ -13,114 +13,117 @@
   </head>
   <body>
     <main class="content">
- <canvas id ="starry-bg"></canvas>
-    <section id="landing">
-      <div class="landing__overlay"></div>
-      <nav class="navbar">
-        <div class="nav__row">
-          <div class="nav__logo">
-            <figure>
-              <img src="./assets/OMdb_logo.svg" class="nav__logo--img" alt="" />
-            </figure>
+      <canvas id="starry-bg"></canvas>
+      <section id="landing">
+        <div class="landing__overlay"></div>
+        <nav class="navbar">
+          <div class="nav__row">
+            <div class="nav__logo">
+              <figure>
+                <img
+                  src="./assets/OMdb_logo.svg"
+                  class="nav__logo--img"
+                  alt=""
+                />
+              </figure>
+            </div>
+            <ul class="nav__links">
+              <li><a href="#" class="nav__link">Home</a></li>
+              <li><a href="#" class="nav__link">Genres</a></li>
+              <li><a href="#" class="nav__link">About</a></li>
+              <li><a href="#" class="nav__link--primary">Contact</a></li>
+            </ul>
           </div>
-          <ul class="nav__links">
-            <li><a href="#" class="nav__link">Home</a></li>
-            <li><a href="#" class="nav__link">Genres</a></li>
-            <li><a href="#" class="nav__link">About</a></li>
-            <li><a href="#" class="nav__link--primary">Contact</a></li>
-          </ul>
+        </nav>
+        <header>
+          <div class="container">
+            <div class="row">
+              <div class="header__description">
+                <h1 class="header__title">Find Your Favorite Film Today</h1>
+                <div class="search__input--wrapper">
+                  <form class="searchForm">
+                    <input
+                      type="text"
+                      class="search__input"
+                      placeholder="Search by Name, Genre, or Year"
+                    />
+                    <button class="submit">
+                      <i class="fa-solid fa-magnifying-glass search__logo"></i>
+                    </button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div>
+        </header>
+      </section>
+
+      <section id="search__results">
+        <div class="filter__content--wrapper">
+          <h1 class="search-info">Search Results:</h1>
+          <div class="duration__filter--wrapper">
+            <h2 class="filter-parameter">Film Length: 0 to 240 minutes</h2>
+            <input type="range" class="runtime__slider" min="0" max="240" />
+            <div class="input__slider--text">
+              <span class="runtime__parameter">0 min</span>
+              <span class="runtime__current">240 min</span>
+              <span class="runtime__parameter">240 min</span>
+            </div>
+          </div>
         </div>
-      </nav>
-      <header>
-        <div class="container">
-          <div class="row">
-            <div class="header__description">
-              <h1 class="header__title">Find Your Favorite Film Today</h1>
-              <div class="search__input--wrapper">
-                <form class="searchForm">
-                  <input
-                    type="text"
-                    class="search__input"
-                    placeholder="Search by Name, Genre, or Year"
-                  />
-                  <button class="submit">
-                    <i class="fa-solid fa-magnifying-glass search__logo"></i>
-                  </button>
-                </form>
+        <div class="films__loading">
+          <i class="fa-solid fa-spinner fa-spin-pulse"></i>
+        </div>
+        <div class="films">
+          <div class="film">
+            <figure class="film__img--wrapper">
+              <img class="film__img" src="./assets/dune_film_img.jpg" alt="" />
+            </figure>
+            <div class="film__details--wrapper">
+              <div class="film__title">Dune</div>
+              <div class="film__year">
+                <img
+                  class="film__year--logo"
+                  src="./assets/calendar-days-regular.svg"
+                  alt=""
+                />
+                <div class="film__year--number">1984</div>
+              </div>
+              <div class="media__type--wrapper">
+                <div class="media__type--logo">
+                  <img src="./assets/clapperboard-solid.svg" alt="" />
+                </div>
+                <div class="media__type"></div>
+              </div>
+              <div class="film__rating--wrapper">
+                <div class="film__rating--logo">
+                  <img src="./assets/star-solid-full.svg" alt="" />
+                </div>
+                <div class="film__rating--number">6.2/10</div>
+              </div>
+              <div class="film__duration">
+                <div class="film__duration--logo">
+                  <img src="./assets/clock-regular.svg" alt="" />
+                </div>
+                <div class="film__duration--number">2h 17m</div>
               </div>
             </div>
           </div>
         </div>
-      </header>
-    </section>
-
-    <section id="search__results">
-      <div class="filter__content--wrapper">
-        <h1 class="search-info">Search Results:</h1>
-        <div class="duration__filter--wrapper">
-          <h2 class="filter-parameter">Film Length: 0 to 240 minutes</h2>
-          <input type="range" class="runtime__slider" min="0" max="240" />
-          <div class="input__slider--text">
-            <span class="runtime__parameter">0 min</span>
-            <span class="runtime__current">240 min</span>
-            <span class="runtime__parameter">240 min</span>
-          </div>
-        </div>
-      </div>
-      <div class="films__loading">
-        <i
-          class="fa-solid fa-spinner fa-spin-pulse"
-        ></i>
-      </div>
-      <div class="films">
-        <div class="film">
-          <figure class="film__img--wrapper">
-            <img class="film__img" src="./assets/dune_film_img.jpg" alt="" />
-          </figure>
-          <div class="film__title">Dune</div>
-          <div class="film__year">
-            <img
-              class="film__year--logo"
-              src="./assets/calendar-days-regular.svg"
-              alt=""
-            />
-            <div class="film__year--number">1984</div>
-          </div>
-          <div class="media__type--wrapper">
-            <div class="media__type--logo">
-              <img src="./assets/clapperboard-solid.svg" alt="" />
-            </div>
-            <div class="media__type"></div>
-          </div>
-          <div class="film__rating--wrapper">
-            <div class="film__rating--logo">
-              <img src="./assets/star-solid-full.svg" alt="" />
-            </div>
-            <div class="film__rating--number">6.2/10</div>
-          </div>
-          <div class="film__duration">
-            <div class="film__duration--logo">
-              <img src="./assets/clock-regular.svg" alt="" />
-            </div>
-            <div class="film__duration--number">2h 17m</div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </section>
     </main>
-    </body>
-    <footer class="footer">
-      <div class="footer__container">
-        <div class="footer__row">
-          <div class="footer__links">
-              <a href="#" class="footer__link">Home</a>
-              <a href="#" class="footer__link">Genres</a>
-              <a href="#" class="footer__link">About</a>
-              <a href="#" class="footer__link">Contact</a>
-          </div>
-              <p class="copyright">Copyright &copy; Chandler Urenda 2026</p>
+  </body>
+  <footer class="footer">
+    <div class="footer__container">
+      <div class="footer__row">
+        <div class="footer__links">
+          <a href="#" class="footer__link">Home</a>
+          <a href="#" class="footer__link">Genres</a>
+          <a href="#" class="footer__link">About</a>
+          <a href="#" class="footer__link">Contact</a>
         </div>
+        <p class="copyright">Copyright &copy; Chandler Urenda 2026</p>
       </div>
-    </footer>
-  
+    </div>
+  </footer>
 </html>

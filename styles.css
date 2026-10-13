@@ -502,6 +502,10 @@ footer a {
     font-size: 0.75rem;
   }
 
+  .film__details--wrapper {
+    font-size: 12px;
+  }
+
 }
 
 @media (max-width: 1024px) {
@@ -527,11 +531,11 @@ footer a {
   }
 
   .film__img--wrapper {
-    margin-bottom: 32px;
+    margin-bottom: 24px;
   }
 
   .film {
-    width: 100%;
+    width: 50%;
     margin-bottom: 32px;
   }
 
@@ -546,5 +550,26 @@ footer a {
   .nav__logo--img {
     display: none;
   }
+
+}
+
+
+@media (max-width: 640px) {
+
+  .films {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .film {
+    width: 100%;
+  }
+
+  .film__img {
+    width: 50%;
+  }
+
 
 }

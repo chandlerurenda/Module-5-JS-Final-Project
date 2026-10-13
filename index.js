@@ -184,17 +184,17 @@ async function main() {
         );
 
         renderFilms(validDetails);
-        
+
         const runtimeSlider = document.querySelector(".runtime__slider");
         if (runtimeSlider) {
           const runtimeCurrent = document.querySelector(".runtime__current");
           let debounceTimer;
           runtimeSlider.oninput = (event) => {
-              const value = parseInt(event.target.value, 10);
-              runtimeCurrent.textContent = `${value} min`;
-              clearTimeout(debounceTimer);
-              debounceTimer = setTimeout(() => {
-              const selectedRuntime = value
+            const value = parseInt(event.target.value, 10);
+            runtimeCurrent.textContent = `${value} min`;
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => {
+              const selectedRuntime = value;
               const filmElements = document.querySelectorAll(".film");
               const firstPositions = new Map();
               filmElements.forEach((film) => {
@@ -204,21 +204,22 @@ async function main() {
                 }
               });
 
-            filmElements.forEach((film, index) => {
-              const filmRuntime =
-                parseInt(validDetails[index].Runtime, 10) || 0;
-              if (filmRuntime <= selectedRuntime) {
-                    if (film.style.display === "none") {
-                      film.style.display = "";
-                      film.style.opacity = 0;
-                      film.getBoundingClientRect();
-                      film.animate(
-                        [{ opacity: 0 }, { opacity: 1 }],
-                        {duration: 300, easing: "ease-out", fill: "forwards"}
-                      );
-                    }
-//                 
-              } else {
+              filmElements.forEach((film, index) => {
+                const filmRuntime =
+                  parseInt(validDetails[index].Runtime, 10) || 0;
+                if (filmRuntime <= selectedRuntime) {
+                  if (film.style.display === "none") {
+                    film.style.display = "";
+                    film.style.opacity = 0;
+                    film.getBoundingClientRect();
+                    film.animate([{ opacity: 0 }, { opacity: 1 }], {
+                      duration: 300,
+                      easing: "ease-out",
+                      fill: "forwards",
+                    });
+                  }
+                  //
+                } else {
                   const rect = film.getBoundingClientRect();
                   const clone = film.cloneNode(true);
                   clone.style.position = "fixed";
@@ -230,46 +231,45 @@ async function main() {
                   clone.style.zIndex = 1000;
                   document.body.appendChild(clone);
                   film.style.display = "none";
-                  const anim = clone.animate(
-                    [{ opacity: 1 }, { opacity: 0 }],
-                    {duration: 300, easing: "ease-out"},
-                  );
+                  const anim = clone.animate([{ opacity: 1 }, { opacity: 0 }], {
+                    duration: 300,
+                    easing: "ease-out",
+                  });
                   anim.onfinish = () => clone.remove();
-              }
-            });
-            const lastPositions = new Map();
-            filmElements.forEach((film) => {
-              if (film.style.display !== "none") {
-                const rect = film.getBoundingClientRect();
-                lastPositions.set(film, rect);
-                const first = firstPositions.get(film);
-                const last = lastPositions.get(film);
-                if (first && last) {
-                  const deltaX = first.x - last.x;
-                  const deltaY = first.y - last.y;
-                  film.animate(
-                    [
-                      { transform: `translate(${deltaX}px, ${deltaY}px)` },
-                      { transform: "translate(0px, 0px)" },
-                    ],
-                    { duration: 300, easing: "ease-out" },
-                  );
                 }
-              }
-            });
-          }, 300);
-        };
-      }
+              });
+              const lastPositions = new Map();
+              filmElements.forEach((film) => {
+                if (film.style.display !== "none") {
+                  const rect = film.getBoundingClientRect();
+                  lastPositions.set(film, rect);
+                  const first = firstPositions.get(film);
+                  const last = lastPositions.get(film);
+                  if (first && last) {
+                    const deltaX = first.x - last.x;
+                    const deltaY = first.y - last.y;
+                    film.animate(
+                      [
+                        { transform: `translate(${deltaX}px, ${deltaY}px)` },
+                        { transform: "translate(0px, 0px)" },
+                      ],
+                      { duration: 300, easing: "ease-out" },
+                    );
+                  }
+                }
+              });
+            }, 300);
+          };
+        }
       } else {
         renderErrorMessage(filmsData.Error);
       }
-    
-      } catch (error) {
-       filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
-      } finally {
+    } catch (error) {
+      filmEl.innerHTML = `<p class="error-message">Something went wrong. Please try again</p>`;
+    } finally {
       setLoading(false);
-      }
     }
+  }
 
   function renderErrorMessage(message) {
     filmEl.innerHTML = `<p class="error-message">${message}</p>`;
@@ -288,6 +288,7 @@ async function main() {
             <img class="film__img" src="${poster}" alt="${data.Title}";
             onerror="this.src='./assets/no-poster.jpg'"/>
           </figure>
+          <div class="film__details--wrapper">
           <div class="film__title">${data.Title}</div>
           <div class="film__year">
             <img class="film__year--logo"
@@ -313,6 +314,7 @@ async function main() {
             </div>
             <div class="film__duration--number">${data.Runtime}</div>
           </div>
+        </div>
         </div>`;
       })
       .join("");
