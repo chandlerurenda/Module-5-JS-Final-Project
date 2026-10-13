@@ -208,9 +208,33 @@ async function main() {
               const filmRuntime =
                 parseInt(validDetails[index].Runtime, 10) || 0;
               if (filmRuntime <= selectedRuntime) {
-                film.style.display = "";
+                    if (film.style.display === "none") {
+                      film.style.display = "";
+                      film.style.opacity = 0;
+                      film.getBoundingClientRect();
+                      film.animate(
+                        [{ opacity: 0 }, { opacity: 1 }],
+                        {duration: 300, easing: "ease-out", fill: "forwards"}
+                      );
+                    }
+//                 
               } else {
-                film.style.display = "none";
+                  const rect = film.getBoundingClientRect();
+                  const clone = film.cloneNode(true);
+                  clone.style.position = "fixed";
+                  clone.style.left = `${rect.left}px`;
+                  clone.style.top = `${rect.top}px`;
+                  clone.style.width = `${rect.width}px`;
+                  clone.style.height = `${rect.height}px`;
+                  clone.style.margin = "0";
+                  clone.style.zIndex = 1000;
+                  document.body.appendChild(clone);
+                  film.style.display = "none";
+                  const anim = clone.animate(
+                    [{ opacity: 1 }, { opacity: 0 }],
+                    {duration: 300, easing: "ease-out"},
+                  );
+                  anim.onfinish = () => clone.remove();
               }
             });
             const lastPositions = new Map();
