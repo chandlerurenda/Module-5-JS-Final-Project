@@ -526,6 +526,10 @@ footer a {
     font-size: .8rem;
   }
 
+  .film__img--wrapper {
+    margin-bottom: 32px;
+  }
+
   .film {
     width: 100%;
     margin-bottom: 32px;
