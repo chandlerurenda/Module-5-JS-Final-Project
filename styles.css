@@ -67,14 +67,14 @@ a {
 #landing {
   position: relative;
   width: 100%;
-  height: 40vh;
+  aspect-ratio: 1316 / 613;
 }
 
 .landing__overlay {
   position: absolute;
   top: 0;
   left: 0;
-  height: 40vh;
+  Height: 40vh;
   width: 100%;
   background-image: url("/assets/Dune_1984_Overlay.jpg");
   background-size: cover;
@@ -156,7 +156,7 @@ a {
 }
 
 header {
-  height: calc(40vh - 80px);
+  height: calc(100% - 80px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -455,9 +455,15 @@ footer a {
 
 /* Responsiveness & Media Queries */
 
-@media (width > 1440px) {
+@media (width > 1460px) {
   .landing__overlay {
     max-width: 100%;
     height: 100%;
+  }
+}
+
+@media (max-width = 1024px) {
+  .films {
+    width: calc(100% / 2);
   }
 }
