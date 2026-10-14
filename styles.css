@@ -325,8 +325,14 @@ header {
 }
 
 .film__details--wrapper {
-  display: flex;
+  display: grid;
+  grid-template-columns: 100px 100px;
+  grid-template-rows: 25px 25px;
+  gap: 10px;
+  place-items: center;
 }
+
+
 
 .film__details {
   display: flex;
@@ -335,7 +341,6 @@ header {
 
 .film__year {
   font-size: 1.25rem;
-  margin-right: 4rem;
   margin-bottom: .4rem;
   display: flex;
   align-items: center;
@@ -369,7 +374,6 @@ header {
 .media__type--wrapper {
   display: flex;
   align-items: center;
-  margin-right: 4rem;
   margin-bottom: .4rem;
 }
 
@@ -388,7 +392,7 @@ header {
   display: flex;
   align-items: center;
   color: #fff;
-  margin-right: 4rem;
+  margin-bottom: .4rem;
 }
 
 .film__rating--logo {
