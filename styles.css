@@ -640,3 +640,25 @@ footer a {
     font-size: 1.1rem;
   }
 }
+
+@media (max-width: 480px) {
+  .header__title {
+    font-size: 0.8rem;
+  }
+
+  .search__input {
+    font-size: 0.6rem;
+  }
+
+  .searchForm {
+    
+  }
+
+  .submit {
+    font-size: 10px;
+  }
+
+  .footer__link {
+    font-size: 14px;
+  }
+}
