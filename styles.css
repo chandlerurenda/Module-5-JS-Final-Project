@@ -448,8 +448,10 @@ footer a {
 .footer__links {
   display: flex;
   justify-content: space-around;
+  align-items: center;
   margin-bottom: 72px;
   margin-top: 72px;
+  max-width: 720px
 }
 
 .footer__link {
@@ -583,7 +585,7 @@ footer a {
   .films {
     width: 100%;
     display: flex;
-    flex-direction: column;
+   
   }
 
   .film {
@@ -591,12 +593,19 @@ footer a {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
   }
 
-  .film__img {
+  .film__img--wrapper {
     width: 75%;
+  }
+
+  .film__title {
     display: flex;
-    
+  }
+
+  .film__details--wrapper {
+    width: 75%;
   }
 
   .duration__filter--wrapper {
